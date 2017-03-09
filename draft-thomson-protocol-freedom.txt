@@ -8,7 +8,7 @@ Intended status: Standards Track                          March 09, 2017
 Expires: September 10, 2017
 
 
-                          Freedom in Protocols
+          Factors Influencing the Freedom to Change Protocols
                  draft-thomson-protocol-freedom-latest
 
 Abstract
@@ -61,58 +61,43 @@ Internet-Draft              Protocol Freedom                  March 2017
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-   2.  Implementations of Protocols are Imperfect  . . . . . . . . .   3
+   2.  Implementations of Protocols are Imperfect  . . . . . . . . .   2
      2.1.  Good Protocol Design is Not Sufficient  . . . . . . . . .   3
      2.2.  Multi-Party Interactions and Middleboxes  . . . . . . . .   4
    3.  Protocol Freedom  . . . . . . . . . . . . . . . . . . . . . .   5
-     3.1.  Use of Protocol Freedom . . . . . . . . . . . . . . . . .   6
+     3.1.  Use of Protocol Freedom . . . . . . . . . . . . . . . . .   5
      3.2.  Reliance on Protocol Freedom  . . . . . . . . . . . . . .   6
      3.3.  Unused Extension Points Become Unusable . . . . . . . . .   7
    4.  Defensive Design Principles for Protocol Freedom  . . . . . .   7
      4.1.  Grease  . . . . . . . . . . . . . . . . . . . . . . . . .   7
      4.2.  Cryptography  . . . . . . . . . . . . . . . . . . . . . .   8
-     4.3.  Visibility  . . . . . . . . . . . . . . . . . . . . . . .   9
+     4.3.  Visibility  . . . . . . . . . . . . . . . . . . . . . . .   8
    5.  Security Considerations . . . . . . . . . . . . . . . . . . .   9
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
-   7.  Informative References  . . . . . . . . . . . . . . . . . . .  10
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
+   7.  Informative References  . . . . . . . . . . . . . . . . . . .   9
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  12
 
 1.  Introduction
 
-   Successful protocols evolve over time in response to changes in their
-   usage.  New use cases, conditions and constraints on the deployment
-   of a protocol can render the protocol obsolete.  A successful
-   protocol [RFC5218] will change in ways that allow it to continue to
-   fulfill the needs of its users.
+   A successful protocol [RFC5218] will change in ways that allow it to
+   continue to fulfill the needs of its users.  New use cases,
+   conditions and constraints on the deployment of a protocol can render
+   a protocol that does not change obsolete.
 
-   Changes often manifest over time with a shift in the usage patterns
-   of the protocol.  These changes are made without changing the
-   fundamental structure of the protocol.  However, it is rare that the
-   design of a protocol properly anticipate future needs to the extent
-   that a protocol can remain relevant without being changed itself.
+   Usage patterns and requirements for a protocol shift over time.
+   Protocols can react to these shifts in one of three ways: adjust
+   usage patterns within the constraints of the protocol, extend the
+   protocol, and replace the protocol.  These reactions are
+   progressively more disruptive, but are also dictated by the nature of
+   the change in requirements over longer periods.
 
-   Evolving requirements for protocols can often be managed
-   incrementally for some time.  Over longer periods it might be
-   necessary to deploy entirely new protocols.  Though new protocol
-   versions are much more disruptive, they are needed if there are
-   fundamental shortcomings in the original protocol design when
-   assessed against current needs.
-
-   Experience with Internet scale protocol deployment shows that adding
-   features or designing entirely new versions is not uniformly
-   successful.  [I-D.iab-protocol-transitions] examines the problem more
-   broadly.
+   Experience with Internet scale protocol deployment shows that
+   changing protocols is not uniformly successful.
+   [I-D.iab-protocol-transitions] examines the problem more broadly.
 
    This document examines the specific conditions that determine whether
    protocol maintainers have the ability - the freedom - to design and
    deploy new or modified protocols.
-
-
-
-Thomson                Expires September 10, 2017               [Page 2]
-
-Internet-Draft              Protocol Freedom                  March 2017
-
 
 2.  Implementations of Protocols are Imperfect
 
@@ -121,6 +106,14 @@ Internet-Draft              Protocol Freedom                  March 2017
    to interoperate.  Bugs in the handling of new codepoints or
    extensions can mean that instead of handling the mechanism as
    designed, endpoints react poorly.  This can manifest as abrupt
+
+
+
+Thomson                Expires September 10, 2017               [Page 2]
+
+Internet-Draft              Protocol Freedom                  March 2017
+
+
    termination of sessions, errors, crashes, or disappearances of
    endpoints and timeouts.
 
@@ -161,6 +154,13 @@ Internet-Draft              Protocol Freedom                  March 2017
    This has proven to be insufficient in practice.  Many protocols have
    evidence of imperfect implementation of these critical mechanisms.
    Mechanisms that aren't used are the ones that fail most often.  The
+   same paragraph from RFC 6709 acknowledges the existence of this
+   problem, but does not offer any remedy:
+
+      The nature of protocol version-negotiation mechanisms is that, by
+      definition, they don't get widespread real-world testing until
+      _after_ the base protocol has been deployed for a while, and its
+      deficiencies have become evident.
 
 
 
@@ -169,14 +169,6 @@ Thomson                Expires September 10, 2017               [Page 3]
 
 Internet-Draft              Protocol Freedom                  March 2017
 
-
-   same paragraph from RFC 6709 acknowledges the existence of this
-   problem, but does not offer any remedy:
-
-      The nature of protocol version-negotiation mechanisms is that, by
-      definition, they don't get widespread real-world testing until
-      _after_ the base protocol has been deployed for a while, and its
-      deficiencies have become evident.
 
    Transport Layer Security (TLS) [RFC5246] provides examples of where a
    design that is objectively sound fails when incorrectly implemented.
@@ -219,13 +211,6 @@ Internet-Draft              Protocol Freedom                  March 2017
    elements can be passed on to other entities in ways that can affect
    protcol operation.
 
-
-
-Thomson                Expires September 10, 2017               [Page 4]
-
-Internet-Draft              Protocol Freedom                  March 2017
-
-
    One of the key challenges in deploying new features in a protocol is
    ensuring compatibility with all actors that could influence the
    outcome.
@@ -233,6 +218,14 @@ Internet-Draft              Protocol Freedom                  March 2017
    Protocols that deploy without active measures against intermediation
    can accrue middleboxes that depend on certain aspects of the
    protocol.  In particular, one of the consequences of an unencrypted
+
+
+
+Thomson                Expires September 10, 2017               [Page 4]
+
+Internet-Draft              Protocol Freedom                  March 2017
+
+
    protocol is that any element on path can interact with the protocol.
    For example, HTTP recognizes the role of a transparent proxy
    [RFC7230].  Because HTTP was specifically designed with
@@ -272,8 +265,15 @@ Internet-Draft              Protocol Freedom                  March 2017
       freedom. -[FOUCAULT1]
 
    In the same way, the design of a protocol for extensibility and
-   eventual replacement [RFC6709] is not assured by the specification
-   that defines the protocol.  The specification only makes it possible
+   eventual replacement [RFC6709] does not guarantee the ability to
+   exercise those options.
+
+3.1.  Use of Protocol Freedom
+
+   Though planning and specifying these options is a necessarily
+   precondition for their availability, whether they are available
+   depends on more than what is written in a specification.  The nature
+
 
 
 
@@ -282,13 +282,8 @@ Thomson                Expires September 10, 2017               [Page 5]
 Internet-Draft              Protocol Freedom                  March 2017
 
 
-   to use that protocol for use cases that were not originally conceived
-   by the designers or to provide a replacement that is better suited.
-
-3.1.  Use of Protocol Freedom
-
-   Designing for protocol freedom makes freedom possible, but does not
-   assure it.
+   a protocol deployment has a significant effect on whether that
+   protocol can be changed.
 
       This is why I emphasize practices of freedom over processes of
       liberation; again, the latter indeed have their place, but they do
@@ -329,7 +324,12 @@ Internet-Draft              Protocol Freedom                  March 2017
 
    The best way to guarantee that a protocol mechanism is used is to
    make it critical to an endpoint participating in that protocol.  This
+   means that implementations rely on both the existence of a mechanism
+   and it being used.
 
+   For example, the message format in SMTP relies on header fields for
+   most of its functions, including the most basic functions.  A
+   deployment of SMTP cannot avoid including an implementation of header
 
 
 
@@ -338,12 +338,6 @@ Thomson                Expires September 10, 2017               [Page 6]
 Internet-Draft              Protocol Freedom                  March 2017
 
 
-   means that implementations rely on both the existence of a mechanism
-   and it being used.
-
-   For example, the message format in SMTP relies on header fields for
-   most of its functions, including the most basic functions.  A
-   deployment of SMTP cannot avoid including an implementation of header
    field handling.  In addition to this, the regularity with which new
    header fields are defined and used ensures that deployments
    frequently encounter header fields that it does not understand.  An
@@ -386,6 +380,12 @@ Internet-Draft              Protocol Freedom                  March 2017
 
    The grease design aims at the style of negotiation most used in TLS,
    where the client offers a set of options and the server chooses the
+   one that it most prefers from those that it supports.  In that
+   design, the client randomly offers options (usually just one) from a
+   set of reserved values.  These values are guaranteed to never be
+   assigned real meaning, so the server will never have cause to
+   genuinely select one of these values.
+
 
 
 
@@ -393,12 +393,6 @@ Thomson                Expires September 10, 2017               [Page 7]
 
 Internet-Draft              Protocol Freedom                  March 2017
 
-
-   one that it most prefers from those that it supports.  In that
-   design, the client randomly offers options (usually just one) from a
-   set of reserved values.  These values are guaranteed to never be
-   assigned real meaning, so the server will never have cause to
-   genuinely select one of these values.
 
    The principle that grease operates on is that an implementation that
    is regularly exposed to unknown values is not likely to become
@@ -439,7 +433,13 @@ Internet-Draft              Protocol Freedom                  March 2017
    QUIC also uses integrity protection over all the data it exchanges to
    prevent modification.
 
+4.3.  Visibility
 
+   Modern software engineering practice includes a strong emphasis on
+   measuring the effects of changes and correcting based on that
+   feedback.  Runtime monitoring of system health is an important part
+   of that, which relies on systems of logging and synthetic health
+   indicators, such as aggregate transaction failure rates.
 
 
 
@@ -449,14 +449,6 @@ Thomson                Expires September 10, 2017               [Page 8]
 
 Internet-Draft              Protocol Freedom                  March 2017
 
-
-4.3.  Visibility
-
-   Modern software engineering practice includes a strong emphasis on
-   measuring the effects of changes and correcting based on that
-   feedback.  Runtime monitoring of system health is an important part
-   of that, which relies on systems of logging and synthetic health
-   indicators, such as aggregate transaction failure rates.
 
    Feedback is critical to the success of the grease technique (see
    Section 4.1).  The system only works if an implementer creates a way
@@ -495,17 +487,6 @@ Internet-Draft              Protocol Freedom                  March 2017
    replace cryptographic algorithms over time has been well established
    [RFC7696].
 
-
-
-
-
-
-
-Thomson                Expires September 10, 2017               [Page 9]
-
-Internet-Draft              Protocol Freedom                  March 2017
-
-
 6.  IANA Considerations
 
    This document makes no request of IANA.
@@ -515,6 +496,15 @@ Internet-Draft              Protocol Freedom                  March 2017
    [FOUCAULT1]
               Foucault, M. and P. Rabinow, Ed., "The Foucault Reader",
               ISBN 0394713400, November 1984.
+
+
+
+
+
+Thomson                Expires September 10, 2017               [Page 9]
+
+Internet-Draft              Protocol Freedom                  March 2017
+
 
    [FOUCAULT2]
               Foucault, M. and P. Rabinow, Ed., "Ethics: Subjectivity
@@ -555,13 +545,6 @@ Internet-Draft              Protocol Freedom                  March 2017
               DOI 10.17487/RFC3261, June 2002,
               <http://www.rfc-editor.org/info/rfc3261>.
 
-
-
-Thomson                Expires September 10, 2017              [Page 10]
-
-Internet-Draft              Protocol Freedom                  March 2017
-
-
    [RFC5218]  Thaler, D. and B. Aboba, "What Makes For a Successful
               Protocol?", RFC 5218, DOI 10.17487/RFC5218, July 2008,
               <http://www.rfc-editor.org/info/rfc5218>.
@@ -570,6 +553,14 @@ Internet-Draft              Protocol Freedom                  March 2017
               (TLS) Protocol Version 1.2", RFC 5246,
               DOI 10.17487/RFC5246, August 2008,
               <http://www.rfc-editor.org/info/rfc5246>.
+
+
+
+
+Thomson                Expires September 10, 2017              [Page 10]
+
+Internet-Draft              Protocol Freedom                  March 2017
+
 
    [RFC5322]  Resnick, P., Ed., "Internet Message Format", RFC 5322,
               DOI 10.17487/RFC5322, October 2008,
@@ -610,14 +601,6 @@ Internet-Draft              Protocol Freedom                  March 2017
               BCP 201, RFC 7696, DOI 10.17487/RFC7696, November 2015,
               <http://www.rfc-editor.org/info/rfc7696>.
 
-
-
-
-Thomson                Expires September 10, 2017              [Page 11]
-
-Internet-Draft              Protocol Freedom                  March 2017
-
-
    [RFC7838]  Nottingham, M., McManus, P., and J. Reschke, "HTTP
               Alternative Services", RFC 7838, DOI 10.17487/RFC7838,
               April 2016, <http://www.rfc-editor.org/info/rfc7838>.
@@ -627,12 +610,29 @@ Internet-Draft              Protocol Freedom                  March 2017
               <https://mailarchive.ietf.org/arch/msg/
               tls/1t79gzNItZd71DwwoaqcQQ_4Yxc>.
 
+
+
+
+Thomson                Expires September 10, 2017              [Page 11]
+
+Internet-Draft              Protocol Freedom                  March 2017
+
+
 Author's Address
 
    Martin Thomson
    Mozilla
 
    Email: martin.thomson@gmail.com
+
+
+
+
+
+
+
+
+
 
 
 
