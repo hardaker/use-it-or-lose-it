@@ -2,9 +2,9 @@
 
 
 
-Thoughtful                                                    M. Thomson
+Network Working Group                                         M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                           March 9, 2017
+Intended status: Standards Track                          March 09, 2017
 Expires: September 10, 2017
 
 
