@@ -4,7 +4,7 @@
 
 Network Working Group                                         M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                      September 12, 2017
+Intended status: Informational                        September 12, 2017
 Expires: March 16, 2018
 
 
