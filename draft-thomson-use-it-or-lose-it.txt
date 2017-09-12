@@ -9,7 +9,7 @@ Expires: March 16, 2018
 
 
           Long-term Viability of Protocol Extension Mechanisms
-                 draft-thomson-protocol-freedom-latest
+                 draft-thomson-use-it-or-lose-it-latest
 
 Abstract
 
