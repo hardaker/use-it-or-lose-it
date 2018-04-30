@@ -4,8 +4,8 @@
 
 Network Working Group                                         M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Informational                            March 27, 2018
-Expires: September 28, 2018
+Intended status: Informational                            April 30, 2018
+Expires: November 1, 2018
 
 
           Long-term Viability of Protocol Extension Mechanisms
@@ -33,7 +33,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 28, 2018.
+   This Internet-Draft will expire on November 1, 2018.
 
 Copyright Notice
 
@@ -53,19 +53,19 @@ Copyright Notice
 
 
 
-Thomson                Expires September 28, 2018               [Page 1]
+Thomson                 Expires November 1, 2018                [Page 1]
 
-Internet-Draft              Use It Or Lose It                 March 2018
+Internet-Draft              Use It Or Lose It                 April 2018
 
 
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-   2.  Implementations of Protocols are Imperfect  . . . . . . . . .   2
+   2.  Implementations of Protocols are Imperfect  . . . . . . . . .   3
      2.1.  Good Protocol Design is Not Sufficient  . . . . . . . . .   3
      2.2.  Multi-Party Interactions and Middleboxes  . . . . . . . .   4
    3.  Retaining Viable Protocol Evolution Mechanisms  . . . . . . .   5
-     3.1.  Practice Can Ensure Viability . . . . . . . . . . . . . .   5
+     3.1.  Examples of Active Use  . . . . . . . . . . . . . . . . .   5
      3.2.  Dependency is Better  . . . . . . . . . . . . . . . . . .   6
      3.3.  Unused Extension Points Become Unusable . . . . . . . . .   7
    4.  Defensive Design Principles for Protocols . . . . . . . . . .   7
@@ -76,6 +76,7 @@ Table of Contents
    5.  Security Considerations . . . . . . . . . . . . . . . . . . .   9
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
    7.  Informative References  . . . . . . . . . . . . . . . . . . .   9
+   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  11
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  11
 
 1.  Introduction
@@ -101,19 +102,23 @@ Table of Contents
    modified protocols.  Section 4 outlines several strategies that might
    aid in ensuring that protocol changes remain possible over time.
 
+
+
+
+
+
+
+
+Thomson                 Expires November 1, 2018                [Page 2]
+
+Internet-Draft              Use It Or Lose It                 April 2018
+
+
 2.  Implementations of Protocols are Imperfect
 
    A change to a protocol can be made extremely difficult to deploy if
    there are bugs in implementations with which the new deployment needs
    to interoperate.  Bugs in the handling of new codepoints or
-
-
-
-Thomson                Expires September 28, 2018               [Page 2]
-
-Internet-Draft              Use It Or Lose It                 March 2018
-
-
    extensions can mean that instead of handling the mechanism as
    designed, endpoints react poorly.  This can manifest as abrupt
    termination of sessions, errors, crashes, or disappearances of
@@ -138,6 +143,11 @@ Internet-Draft              Use It Or Lose It                 March 2018
    new protocol design that uses a different method to achieve the same
    result.
 
+   The set of interoperable features in a protocol is often the subset
+   of its features that have some value to those implementing and
+   deploying the protocol.  It is not always the case that future
+   extensibility is in that set.
+
 2.1.  Good Protocol Design is Not Sufficient
 
    It is often argued that the design of a protocol extension point or
@@ -153,6 +163,13 @@ Internet-Draft              Use It Or Lose It                 March 2018
       least managed to implement the version-negotiation mechanism
       correctly.
 
+
+
+Thomson                 Expires November 1, 2018                [Page 3]
+
+Internet-Draft              Use It Or Lose It                 April 2018
+
+
    This has proven to be insufficient in practice.  Many protocols have
    evidence of imperfect implementation of these critical mechanisms.
    Mechanisms that aren't used are the ones that fail most often.  The
@@ -161,15 +178,6 @@ Internet-Draft              Use It Or Lose It                 March 2018
 
       The nature of protocol version-negotiation mechanisms is that, by
       definition, they don't get widespread real-world testing until
-
-
-
-
-Thomson                Expires September 28, 2018               [Page 3]
-
-Internet-Draft              Use It Or Lose It                 March 2018
-
-
       _after_ the base protocol has been deployed for a while, and its
       deficiencies have become evident.
 
@@ -210,27 +218,27 @@ Internet-Draft              Use It Or Lose It                 March 2018
    can be passed on to other entities in ways that can affect protocol
    operation.
 
+
+
+
+Thomson                 Expires November 1, 2018                [Page 4]
+
+Internet-Draft              Use It Or Lose It                 April 2018
+
+
    One of the key challenges in deploying new features in a protocol is
    ensuring compatibility with all actors that could influence the
    outcome.
 
-   Protocols that deploy without active measures against intermediation
-   can accrue middleboxes that depend on certain aspects of the protocol
-   [PATH-SIGNALS].  In particular, one of the consequences of an
-   unencrypted protocol is that any element on path can interact with
-
-
-
-Thomson                Expires September 28, 2018               [Page 4]
-
-Internet-Draft              Use It Or Lose It                 March 2018
-
-
-   the protocol.  For example, HTTP was specifically designed with
-   intermediation in mind, transparent proxies [HTTP] are not only
-   possible but sometimes advantageous, despite some significant
-   downsides.  Consequently, transparent proxies for cleartext HTTP are
-   commonplace.
+   Protocols deployed without active measures against intermediation
+   will tend to become intermediated over time, as network operators
+   deploy middleboxes to perform some function on traffic.  In
+   particular, one of the consequences of an unencrypted protocol is
+   that any element on path can interact with the protocol.  For
+   example, HTTP was specifically designed with intermediation in mind,
+   transparent proxies [HTTP] are not only possible but sometimes
+   advantageous, despite some significant downsides.  Consequently,
+   transparent proxies for cleartext HTTP are commonplace.
 
    Middleboxes are also protocol participants, to the degree that they
    are able to observe and act in ways that affect the protocol.  The
@@ -253,16 +261,26 @@ Internet-Draft              Use It Or Lose It                 March 2018
 
    The design of a protocol for extensibility and eventual replacement
    [EXTENSIBILITY] does not guarantee the ability to exercise those
-   options.  Only active use of those mechanisms can ensure that they
-   remain available for new uses.
+   options.  The set of features that enable future evolution need to be
+   interoperable in the first implementations and deployments of the
+   protocol.  Active use of mechanisms that support evolution is the
+   only way to ensure that they remain available for new uses.
 
-3.1.  Practice Can Ensure Viability
+3.1.  Examples of Active Use
 
-   The fact that the freedom to change depends on practice is evident in
-   protocols that are known to have viable version negotiation or
-   extension points.  The definition of mechanisms alone is
-   insufficient; it's the active use of those mechanisms that determines
-   the existence of freedom.
+   The conditions for retaining the ability to evolve a design is most
+   clearly evident in the protocols that are known to have viable
+   version negotiation or extension points.  The definition of
+   mechanisms alone is insufficient; it's the active use of those
+   mechanisms that determines the existence of freedom.
+
+
+
+
+Thomson                 Expires November 1, 2018                [Page 5]
+
+Internet-Draft              Use It Or Lose It                 April 2018
+
 
    For example, header fields in email [SMTP], HTTP [HTTP] and SIP [SIP]
    all derive from the same basic design.  There is no evidence of
@@ -273,15 +291,6 @@ Internet-Draft              Use It Or Lose It                 March 2018
    In another example, the attribute-value pairs (AVPs) in Diameter
    [DIAMETER] are fundamental to the design of the protocol.  The
    definition of new uses of Diameter regularly exercise the ability to
-
-
-
-
-Thomson                Expires September 28, 2018               [Page 5]
-
-Internet-Draft              Use It Or Lose It                 March 2018
-
-
    add new AVPs and do so with no fear that the new feature might not be
    successfully deployed.
 
@@ -321,6 +330,14 @@ Internet-Draft              Use It Or Lose It                 March 2018
    protocol deployment.  Should an implementation fail to correctly
    implement the mechanism, that failure would quickly become apparent.
 
+
+
+
+Thomson                 Expires November 1, 2018                [Page 6]
+
+Internet-Draft              Use It Or Lose It                 April 2018
+
+
    Caution is advised to avoid assuming that building a dependency on an
    extension mechanism is sufficient to ensure availability of that
    mechanism in the long term.  If the set of possible uses is narrowly
@@ -328,15 +345,6 @@ Internet-Draft              Use It Or Lose It                 March 2018
    might not see new variations or assume a narrower interpretation of
    what is possible.  Those implementations might still exhibit errors
    when presented with a new variation.
-
-
-
-
-
-Thomson                Expires September 28, 2018               [Page 6]
-
-Internet-Draft              Use It Or Lose It                 March 2018
-
 
 3.3.  Unused Extension Points Become Unusable
 
@@ -379,6 +387,13 @@ Internet-Draft              Use It Or Lose It                 March 2018
    values are guaranteed to never be assigned real meaning, so the
    server will never have cause to genuinely select one of these values.
 
+
+
+Thomson                 Expires November 1, 2018                [Page 7]
+
+Internet-Draft              Use It Or Lose It                 April 2018
+
+
    The principle that grease operates on is that an implementation that
    is regularly exposed to unknown values is not likely to become
    intolerant of new values when they appear.  This depends largely on
@@ -386,13 +401,6 @@ Internet-Draft              Use It Or Lose It                 March 2018
    mechanism correctly is not significantly more effort than
    implementing code to specifically filter out the randomized grease
    values.
-
-
-
-Thomson                Expires September 28, 2018               [Page 7]
-
-Internet-Draft              Use It Or Lose It                 March 2018
-
 
    To avoid simple techniques for filtering greasing codepoints, grease
    values are not reserved from a single contiguous block of code
@@ -433,22 +441,19 @@ Internet-Draft              Use It Or Lose It                 March 2018
    protocol.  Similarly, data that is exchanged with integrity
    protection cannot be modified without being detected and discarded.
 
+
+
+
+
+Thomson                 Expires November 1, 2018                [Page 8]
+
+Internet-Draft              Use It Or Lose It                 April 2018
+
+
    The QUIC protocol [QUIC] adopts both encryption and integrity
    protection.  Encryption is used to carefully control what information
    is exposed to middleboxes.  QUIC also uses integrity protection over
    all the data it exchanges to prevent modification.
-
-
-
-
-
-
-
-
-Thomson                Expires September 28, 2018               [Page 8]
-
-Internet-Draft              Use It Or Lose It                 March 2018
-
 
 4.4.  Visibility of Faults
 
@@ -493,18 +498,18 @@ Internet-Draft              Use It Or Lose It                 March 2018
               Alternative Services", RFC 7838, DOI 10.17487/RFC7838,
               April 2016, <https://www.rfc-editor.org/info/rfc7838>.
 
+
+
+
+Thomson                 Expires November 1, 2018                [Page 9]
+
+Internet-Draft              Use It Or Lose It                 April 2018
+
+
    [B2BUA]    Kaplan, H. and V. Pascual, "A Taxonomy of Session
               Initiation Protocol (SIP) Back-to-Back User Agents",
               RFC 7092, DOI 10.17487/RFC7092, December 2013,
               <https://www.rfc-editor.org/info/rfc7092>.
-
-
-
-
-Thomson                Expires September 28, 2018               [Page 9]
-
-Internet-Draft              Use It Or Lose It                 March 2018
-
 
    [DIAMETER]
               Fajardo, V., Ed., Arkko, J., Loughney, J., and G. Zorn,
@@ -546,20 +551,15 @@ Internet-Draft              Use It Or Lose It                 March 2018
               July 2016, <https://mailarchive.ietf.org/arch/msg/tls/
               bOJ2JQc3HjAHFFWCiNTIb0JuMZc>.
 
-   [PATH-SIGNALS]
-              Hardie, T., "Path signals", draft-hardie-path-signals-02
-              (work in progress), November 2017.
-
    [QUIC]     Iyengar, J. and M. Thomson, "QUIC: A UDP-Based Multiplexed
-              and Secure Transport", draft-ietf-quic-transport-10 (work
-              in progress), March 2018.
+              and Secure Transport", draft-ietf-quic-transport-11 (work
+              in progress), April 2018.
 
 
 
-
-Thomson                Expires September 28, 2018              [Page 10]
+Thomson                 Expires November 1, 2018               [Page 10]
 
-Internet-Draft              Use It Or Lose It                 March 2018
+Internet-Draft              Use It Or Lose It                 April 2018
 
 
    [SIP]      Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
@@ -600,7 +600,23 @@ Internet-Draft              Use It Or Lose It                 March 2018
               Subsequent Transitions", RFC 8170, DOI 10.17487/RFC8170,
               May 2017, <https://www.rfc-editor.org/info/rfc8170>.
 
+Acknowledgments
+
+   Brian Trammell and Mark Nottingham made contributions to this
+   document.
+
 Author's Address
+
+
+
+
+
+
+
+Thomson                 Expires November 1, 2018               [Page 11]
+
+Internet-Draft              Use It Or Lose It                 April 2018
+
 
    Martin Thomson
    Mozilla
@@ -613,4 +629,44 @@ Author's Address
 
 
 
-Thomson                Expires September 28, 2018              [Page 11]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Thomson                 Expires November 1, 2018               [Page 12]
