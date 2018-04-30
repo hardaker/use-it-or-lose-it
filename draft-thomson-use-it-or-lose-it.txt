@@ -383,7 +383,7 @@ Internet-Draft              Use It Or Lose It                 April 2018
    negotiation most used in TLS, where the client offers a set of
    options and the server chooses the one that it most prefers from
    those that it supports.  A client that uses grease randomly offers
-   options (usually just one) from a set of reserved values.  These
+   options - usually just one - from a set of reserved values.  These
    values are guaranteed to never be assigned real meaning, so the
    server will never have cause to genuinely select one of these values.
 
@@ -452,8 +452,8 @@ Internet-Draft              Use It Or Lose It                 April 2018
 
    The QUIC protocol [QUIC] adopts both encryption and integrity
    protection.  Encryption is used to carefully control what information
-   is exposed to middleboxes.  QUIC also uses integrity protection over
-   all the data it exchanges to prevent modification.
+   is exposed to middleboxes.  For those fields that are not encrypted,
+   QUIC uses integrity protection to prevent modification.
 
 4.4.  Visibility of Faults
 
