@@ -4,8 +4,8 @@
 
 Network Working Group                                         M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Informational                            April 30, 2018
-Expires: November 1, 2018
+Intended status: Informational                             June 27, 2018
+Expires: December 29, 2018
 
 
           Long-term Viability of Protocol Extension Mechanisms
@@ -33,7 +33,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on November 1, 2018.
+   This Internet-Draft will expire on December 29, 2018.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                 Expires November 1, 2018                [Page 1]
+Thomson                 Expires December 29, 2018               [Page 1]
 
-Internet-Draft              Use It Or Lose It                 April 2018
+Internet-Draft              Use It Or Lose It                  June 2018
 
 
 Table of Contents
@@ -63,21 +63,21 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
    2.  Implementations of Protocols are Imperfect  . . . . . . . . .   3
      2.1.  Good Protocol Design is Not Sufficient  . . . . . . . . .   3
-     2.2.  Multi-Party Interactions and Middleboxes  . . . . . . . .   4
-   3.  Retaining Viable Protocol Evolution Mechanisms  . . . . . . .   5
-     3.1.  Examples of Active Use  . . . . . . . . . . . . . . . . .   5
-     3.2.  Dependency is Better  . . . . . . . . . . . . . . . . . .   6
+     2.2.  Multi-Party Interactions and Middleboxes  . . . . . . . .   5
+   3.  Retaining Viable Protocol Evolution Mechanisms  . . . . . . .   6
+     3.1.  Examples of Active Use  . . . . . . . . . . . . . . . . .   6
+     3.2.  Dependency is Better  . . . . . . . . . . . . . . . . . .   7
      3.3.  Unused Extension Points Become Unusable . . . . . . . . .   7
-   4.  Defensive Design Principles for Protocols . . . . . . . . . .   7
-     4.1.  Active Use  . . . . . . . . . . . . . . . . . . . . . . .   7
-     4.2.  Grease  . . . . . . . . . . . . . . . . . . . . . . . . .   7
-     4.3.  Cryptography  . . . . . . . . . . . . . . . . . . . . . .   8
+   4.  Defensive Design Principles for Protocols . . . . . . . . . .   8
+     4.1.  Active Use  . . . . . . . . . . . . . . . . . . . . . . .   8
+     4.2.  Grease  . . . . . . . . . . . . . . . . . . . . . . . . .   8
+     4.3.  Cryptography  . . . . . . . . . . . . . . . . . . . . . .   9
      4.4.  Visibility of Faults  . . . . . . . . . . . . . . . . . .   9
-   5.  Security Considerations . . . . . . . . . . . . . . . . . . .   9
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
-   7.  Informative References  . . . . . . . . . . . . . . . . . . .   9
-   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  11
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  11
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . .  10
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
+   7.  Informative References  . . . . . . . . . . . . . . . . . . .  10
+   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  12
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  12
 
 1.  Introduction
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson                 Expires November 1, 2018                [Page 2]
+Thomson                 Expires December 29, 2018               [Page 2]
 
-Internet-Draft              Use It Or Lose It                 April 2018
+Internet-Draft              Use It Or Lose It                  June 2018
 
 
 2.  Implementations of Protocols are Imperfect
@@ -165,9 +165,9 @@ Internet-Draft              Use It Or Lose It                 April 2018
 
 
 
-Thomson                 Expires November 1, 2018                [Page 3]
+Thomson                 Expires December 29, 2018               [Page 3]
 
-Internet-Draft              Use It Or Lose It                 April 2018
+Internet-Draft              Use It Or Lose It                  June 2018
 
 
    This has proven to be insufficient in practice.  Many protocols have
@@ -180,6 +180,12 @@ Internet-Draft              Use It Or Lose It                 April 2018
       definition, they don't get widespread real-world testing until
       _after_ the base protocol has been deployed for a while, and its
       deficiencies have become evident.
+
+   Indeed, basic interoperability is considered critical early in the
+   deployment of a protocol, and any engineering practice that values
+   simplicity will tend to make version negotiation and extension
+   mechanisms optional for this basic interoperability.  This leads to
+   these mechanisms being uniquely affected by this problem.
 
    Transport Layer Security (TLS) [TLS12] provides examples of where a
    design that is objectively sound fails when incorrectly implemented.
@@ -210,6 +216,16 @@ Internet-Draft              Use It Or Lose It                 April 2018
    any hope for using the extension point it defines has been abandoned
    [SNI].
 
+
+
+
+
+
+Thomson                 Expires December 29, 2018               [Page 4]
+
+Internet-Draft              Use It Or Lose It                  June 2018
+
+
 2.2.  Multi-Party Interactions and Middleboxes
 
    Even the most superficially simple protocols can often involve more
@@ -217,14 +233,6 @@ Internet-Draft              Use It Or Lose It                 April 2018
    ends, but even at the endpoints of an interaction, protocol elements
    can be passed on to other entities in ways that can affect protocol
    operation.
-
-
-
-
-Thomson                 Expires November 1, 2018                [Page 4]
-
-Internet-Draft              Use It Or Lose It                 April 2018
-
 
    One of the key challenges in deploying new features in a protocol is
    ensuring compatibility with all actors that could influence the
@@ -247,6 +255,15 @@ Internet-Draft              Use It Or Lose It                 April 2018
    a SIP back-to-back user agent (B2BUA) [B2BUA] can be very deeply
    involved in the SIP protocol.
 
+   This phenomenon appears at all layers of the protocol stack, even
+   when protocols are not designed with middlebox participation in mind.
+   TCP's [TCP] extension points have been rendered difficult to use,
+   largely due to middlebox interactions, as experience with Multipath
+   TCP [MPTCP] has shown.  IP's version field was rendered useless when
+   encapsulated over Ethernet, requring a new ethertype with IPv6
+   [RFC2462], due in part to layer 2 devices making version-independent
+   assumptions about the structure of the IPv4 header.
+
    By increasing the number of different actors involved in any single
    protocol exchange, the number of potential implementation bugs that a
    deployment needs to contend with also increases.  In particular,
@@ -256,6 +273,14 @@ Internet-Draft              Use It Or Lose It                 April 2018
 
    Thus, middleboxes can increase the difficulty of deploying changes to
    a protocol considerably.
+
+
+
+
+Thomson                 Expires December 29, 2018               [Page 5]
+
+Internet-Draft              Use It Or Lose It                  June 2018
+
 
 3.  Retaining Viable Protocol Evolution Mechanisms
 
@@ -273,14 +298,6 @@ Internet-Draft              Use It Or Lose It                 April 2018
    version negotiation or extension points.  The definition of
    mechanisms alone is insufficient; it's the active use of those
    mechanisms that determines the existence of freedom.
-
-
-
-
-Thomson                 Expires November 1, 2018                [Page 5]
-
-Internet-Draft              Use It Or Lose It                 April 2018
-
 
    For example, header fields in email [SMTP], HTTP [HTTP] and SIP [SIP]
    all derive from the same basic design.  There is no evidence of
@@ -309,6 +326,18 @@ Internet-Draft              Use It Or Lose It                 April 2018
    protocol that only rarely uses a mechanism, suffer an inability to
    rely on that mechanism.
 
+
+
+
+
+
+
+
+Thomson                 Expires December 29, 2018               [Page 6]
+
+Internet-Draft              Use It Or Lose It                  June 2018
+
+
 3.2.  Dependency is Better
 
    The best way to guarantee that a protocol mechanism is used is to
@@ -329,14 +358,6 @@ Internet-Draft              Use It Or Lose It                 April 2018
    mandated by the specification, it is crucial to the functioning of a
    protocol deployment.  Should an implementation fail to correctly
    implement the mechanism, that failure would quickly become apparent.
-
-
-
-
-Thomson                 Expires November 1, 2018                [Page 6]
-
-Internet-Draft              Use It Or Lose It                 April 2018
-
 
    Caution is advised to avoid assuming that building a dependency on an
    extension mechanism is sufficient to ensure availability of that
@@ -361,6 +382,17 @@ Internet-Draft              Use It Or Lose It                 April 2018
    transfer coding [HTTP], the ability to use transfer codings other
    than the chunked coding, and the range unit in a range request
    [HTTP-RANGE].
+
+
+
+
+
+
+
+Thomson                 Expires December 29, 2018               [Page 7]
+
+Internet-Draft              Use It Or Lose It                  June 2018
+
 
 4.  Defensive Design Principles for Protocols
 
@@ -387,13 +419,6 @@ Internet-Draft              Use It Or Lose It                 April 2018
    values are guaranteed to never be assigned real meaning, so the
    server will never have cause to genuinely select one of these values.
 
-
-
-Thomson                 Expires November 1, 2018                [Page 7]
-
-Internet-Draft              Use It Or Lose It                 April 2018
-
-
    The principle that grease operates on is that an implementation that
    is regularly exposed to unknown values is not likely to become
    intolerant of new values when they appear.  This depends largely on
@@ -416,6 +441,14 @@ Internet-Draft              Use It Or Lose It                 April 2018
    an unwanted experiment, this can be less effective.  Incorrect
    implementations might still be able to correctly identify these code
    points and ignore them.
+
+
+
+
+Thomson                 Expires December 29, 2018               [Page 8]
+
+Internet-Draft              Use It Or Lose It                  June 2018
+
 
    Grease is deployed with the intent of quickly detecting errors in
    implementing the mechanisms it safeguards.
@@ -440,15 +473,6 @@ Internet-Draft              Use It Or Lose It                 April 2018
    middleboxes, excluding them from participating in that part of the
    protocol.  Similarly, data that is exchanged with integrity
    protection cannot be modified without being detected and discarded.
-
-
-
-
-
-Thomson                 Expires November 1, 2018                [Page 8]
-
-Internet-Draft              Use It Or Lose It                 April 2018
-
 
    The QUIC protocol [QUIC] adopts both encryption and integrity
    protection.  Encryption is used to carefully control what information
@@ -475,6 +499,13 @@ Internet-Draft              Use It Or Lose It                 April 2018
    for capturing failures in alternative services is therefore necessary
    for failures to be detected.
 
+
+
+Thomson                 Expires December 29, 2018               [Page 9]
+
+Internet-Draft              Use It Or Lose It                  June 2018
+
+
 5.  Security Considerations
 
    The ability to design, implement, and deploy new protocol mechanisms
@@ -498,14 +529,6 @@ Internet-Draft              Use It Or Lose It                 April 2018
               Alternative Services", RFC 7838, DOI 10.17487/RFC7838,
               April 2016, <https://www.rfc-editor.org/info/rfc7838>.
 
-
-
-
-Thomson                 Expires November 1, 2018                [Page 9]
-
-Internet-Draft              Use It Or Lose It                 April 2018
-
-
    [B2BUA]    Kaplan, H. and V. Pascual, "A Taxonomy of Session
               Initiation Protocol (SIP) Back-to-Back User Agents",
               RFC 7092, DOI 10.17487/RFC7092, December 2013,
@@ -524,11 +547,20 @@ Internet-Draft              Use It Or Lose It                 April 2018
               <https://www.rfc-editor.org/info/rfc6709>.
 
    [GREASE]   Benjamin, D., "Applying GREASE to TLS Extensibility",
-              draft-ietf-tls-grease-00 (work in progress), January 2017.
+              draft-ietf-tls-grease-01 (work in progress), June 2018.
 
    [HASH]     Bellovin, S. and E. Rescorla, "Deploying a New Hash
               Algorithm", Proceedings of NDSS '06 , 2006,
               <https://www.cs.columbia.edu/~smb/papers/new-hash.pdf>.
+
+
+
+
+
+Thomson                 Expires December 29, 2018              [Page 10]
+
+Internet-Draft              Use It Or Lose It                  June 2018
+
 
    [HTTP]     Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
               Protocol (HTTP/1.1): Message Syntax and Routing",
@@ -537,8 +569,8 @@ Internet-Draft              Use It Or Lose It                 April 2018
 
    [HTTP-HEADERS]
               Nottingham, M. and P. Kamp, "Structured Headers for HTTP",
-              draft-ietf-httpbis-header-structure-04 (work in progress),
-              March 2018.
+              draft-ietf-httpbis-header-structure-06 (work in progress),
+              June 2018.
 
    [HTTP-RANGE]
               Fielding, R., Ed., Lafon, Y., Ed., and J. Reschke, Ed.,
@@ -551,16 +583,18 @@ Internet-Draft              Use It Or Lose It                 April 2018
               July 2016, <https://mailarchive.ietf.org/arch/msg/tls/
               bOJ2JQc3HjAHFFWCiNTIb0JuMZc>.
 
+   [MPTCP]    Ford, A., Raiciu, C., Handley, M., and O. Bonaventure,
+              "TCP Extensions for Multipath Operation with Multiple
+              Addresses", RFC 6824, DOI 10.17487/RFC6824, January 2013,
+              <https://www.rfc-editor.org/info/rfc6824>.
+
    [QUIC]     Iyengar, J. and M. Thomson, "QUIC: A UDP-Based Multiplexed
-              and Secure Transport", draft-ietf-quic-transport-11 (work
-              in progress), April 2018.
+              and Secure Transport", draft-ietf-quic-transport-12 (work
+              in progress), May 2018.
 
-
-
-Thomson                 Expires November 1, 2018               [Page 10]
-
-Internet-Draft              Use It Or Lose It                 April 2018
-
+   [RFC2462]  Thomson, S. and T. Narten, "IPv6 Stateless Address
+              Autoconfiguration", RFC 2462, DOI 10.17487/RFC2462,
+              December 1998, <https://www.rfc-editor.org/info/rfc2462>.
 
    [SIP]      Rosenberg, J., Schulzrinne, H., Camarillo, G., Johnston,
               A., Peterson, J., Sparks, R., Handley, M., and E.
@@ -577,9 +611,20 @@ Internet-Draft              Use It Or Lose It                 April 2018
               <https://mailarchive.ietf.org/arch/msg/
               tls/1t79gzNItZd71DwwoaqcQQ_4Yxc>.
 
+
+
+Thomson                 Expires December 29, 2018              [Page 11]
+
+Internet-Draft              Use It Or Lose It                  June 2018
+
+
    [SUCCESS]  Thaler, D. and B. Aboba, "What Makes for a Successful
               Protocol?", RFC 5218, DOI 10.17487/RFC5218, July 2008,
               <https://www.rfc-editor.org/info/rfc5218>.
+
+   [TCP]      Postel, J., "Transmission Control Protocol", STD 7,
+              RFC 793, DOI 10.17487/RFC0793, September 1981,
+              <https://www.rfc-editor.org/info/rfc793>.
 
    [TLS-EXT]  Eastlake 3rd, D., "Transport Layer Security (TLS)
               Extensions: Extension Definitions", RFC 6066,
@@ -607,17 +652,6 @@ Acknowledgments
 
 Author's Address
 
-
-
-
-
-
-
-Thomson                 Expires November 1, 2018               [Page 11]
-
-Internet-Draft              Use It Or Lose It                 April 2018
-
-
    Martin Thomson
    Mozilla
 
@@ -635,38 +669,4 @@ Internet-Draft              Use It Or Lose It                 April 2018
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Thomson                 Expires November 1, 2018               [Page 12]
+Thomson                 Expires December 29, 2018              [Page 12]
