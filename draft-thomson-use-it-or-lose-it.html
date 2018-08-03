@@ -26,7 +26,7 @@ body {
   font-weight: bold;
   color: #333;
   line-height: 100%;
-  margin: 0.8em 0 0.3em;
+  margin: 1.2em 0 0.3em;
 }
 .title, #rfc\.title h1 { font-size: 32px; }
 h1, section h1, h2, section h2, section h3, nav h2 { font-size: 20px; }
@@ -165,12 +165,17 @@ a[href]:hover {
   background-color: #eee;
 }
 
-ol, ul, li, p {
+p, ol, ul, li {
   padding: 0;
-  margin: 0.5em 0 0.5em 2em;
 }
-li, p {
-  margin-left: 0;
+p {
+  margin: 0.5em 0;
+}
+ol, ul {
+  margin: 0.2em 0 0.2em 2em;
+}
+li {
+  margin: 0.2em 0;
 }
 address {
   font-style: normal;
@@ -288,10 +293,10 @@ ul.toc li {
 <link href="#rfc.section.4.1" rel="Chapter" title="4.1 Active Use">
 <link href="#rfc.section.4.2" rel="Chapter" title="4.2 Grease">
 <link href="#rfc.section.4.3" rel="Chapter" title="4.3 Cryptography">
-<link href="#rfc.section.4.4" rel="Chapter" title="4.4 Visibility of Faults">
-<link href="#rfc.section.5" rel="Chapter" title="5 Security Considerations">
-<link href="#rfc.section.6" rel="Chapter" title="6 IANA Considerations">
-<link href="#rfc.references" rel="Chapter" title="7 Informative References">
+<link href="#rfc.section.5" rel="Chapter" title="5 Feedback Mechanisms">
+<link href="#rfc.section.6" rel="Chapter" title="6 Security Considerations">
+<link href="#rfc.section.7" rel="Chapter" title="7 IANA Considerations">
+<link href="#rfc.references" rel="Chapter" title="8 Informative References">
 <link href="#rfc.acknowledgments" rel="Chapter">
 <link href="#rfc.authors" rel="Chapter">
 
@@ -301,7 +306,7 @@ ul.toc li {
 
   <meta name="dct.creator" content="Thomson, M." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-use-it-or-lose-it-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2018-06-27" />
+  <meta name="dct.issued" scheme="ISO8601" content="2018-08-03" />
   <meta name="dct.abstract" content="The ability to change protocols depends on exercising the extension and version negotiation mechanisms that support change.  Protocols that don&#8217;t use these mechanisms can find that deploying changes can be difficult and costly." />
   <meta name="description" content="The ability to change protocols depends on exercising the extension and version negotiation mechanisms that support change.  Protocols that don&#8217;t use these mechanisms can find that deploying changes can be difficult and costly." />
 
@@ -322,10 +327,10 @@ ul.toc li {
 </tr>
 <tr>
 <td class="left">Intended status: Informational</td>
-<td class="right">June 27, 2018</td>
+<td class="right">August 03, 2018</td>
 </tr>
 <tr>
-<td class="left">Expires: December 29, 2018</td>
+<td class="left">Expires: February 4, 2019</td>
 <td class="right"></td>
 </tr>
 
@@ -342,7 +347,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on December 29, 2018.</p>
+<p>This Internet-Draft will expire on February 4, 2019.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2018 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -376,13 +381,13 @@ ul.toc li {
 </li>
 <li>4.3.   <a href="#rfc.section.4.3">Cryptography</a>
 </li>
-<li>4.4.   <a href="#rfc.section.4.4">Visibility of Faults</a>
+</ul><li>5.   <a href="#rfc.section.5">Feedback Mechanisms</a>
 </li>
-</ul><li>5.   <a href="#rfc.section.5">Security Considerations</a>
+<li>6.   <a href="#rfc.section.6">Security Considerations</a>
 </li>
-<li>6.   <a href="#rfc.section.6">IANA Considerations</a>
+<li>7.   <a href="#rfc.section.7">IANA Considerations</a>
 </li>
-<li>7.   <a href="#rfc.references">Informative References</a>
+<li>8.   <a href="#rfc.references">Informative References</a>
 </li>
 <li><a href="#rfc.acknowledgments">Acknowledgments</a>
 </li>
@@ -476,30 +481,30 @@ ul.toc li {
 <p id="rfc.section.4.2.p.3">The principle that grease operates on is that an implementation that is regularly exposed to unknown values is not likely to become intolerant of new values when they appear.  This depends largely on the assumption that the difficulty of implementing the protocol mechanism correctly is not significantly more effort than implementing code to specifically filter out the randomized grease values.</p>
 <p id="rfc.section.4.2.p.4">To avoid simple techniques for filtering greasing codepoints, grease values are not reserved from a single contiguous block of code points, but are distributed evenly across the entire space of code points.  Reserving a randomly selected set of code points has a greater chance of avoiding this problem, though it might be more difficult to specify and implement, especially over larger code point spaces.</p>
 <p id="rfc.section.4.2.p.5">Without reserved greasing codepoints, an implementation can use code points from spaces used for private or experimental use if such a range exists.  In addition to the risk of triggering participation in an unwanted experiment, this can be less effective.  Incorrect implementations might still be able to correctly identify these code points and ignore them.</p>
-<p id="rfc.section.4.2.p.6">Grease is deployed with the intent of quickly detecting errors in implementing the mechanisms it safeguards.</p>
-<p id="rfc.section.4.2.p.7">This form of defensive design has some limitations.  It does not necessarily create the need for an implementation to rely on the mechanism it safeguards; that is determined by the underlying protocol itself.  More critically, it does not easily translate to other forms of extension point.  For instance, HMSV negotiation cannot be greased in this fashion.  Other techniques might be necessary for protocols that don&#8217;t rely on the particular style of exchange that is predominant in TLS.</p>
+<p id="rfc.section.4.2.p.6">Grease is deployed with the intent of quickly detecting errors in implementing the mechanisms it safeguards.  Though it has been effective at revealing problems in some cases with TLS, its efficacy isn&#8217;t proven more generally.</p>
+<p id="rfc.section.4.2.p.7">This style of defensive design has some limitations.  It does not necessarily create the need for an implementation to rely on the mechanism it safeguards; that is determined by the underlying protocol itself.  More critically, it does not easily translate to other forms of extension point.  For instance, HMSV negotiation cannot be greased in this fashion.  Other techniques might be necessary for protocols that don&#8217;t rely on the particular style of exchange that is predominant in TLS.</p>
 <h2 id="rfc.section.4.3">
 <a href="#rfc.section.4.3">4.3.</a> <a href="#cryptography" id="cryptography">Cryptography</a>
 </h2>
 <p id="rfc.section.4.3.p.1">Cryptography can be used to reduce the number of entities that can participate in a protocol.  Using tools like TLS ensures that only authorized participants are able to influence whether a new protocol feature is used.</p>
-<p id="rfc.section.4.3.p.2">Data that is exchanged under encryption cannot be seen by middleboxes, excluding them from participating in that part of the protocol.  Similarly, data that is exchanged with integrity protection cannot be modified without being detected and discarded.</p>
-<p id="rfc.section.4.3.p.3">The QUIC protocol <a href="#QUIC" class="xref">[QUIC]</a> adopts both encryption and integrity protection.  Encryption is used to carefully control what information is exposed to middleboxes.  For those fields that are not encrypted, QUIC uses integrity protection to prevent modification.</p>
-<h2 id="rfc.section.4.4">
-<a href="#rfc.section.4.4">4.4.</a> <a href="#visibility-of-faults" id="visibility-of-faults">Visibility of Faults</a>
-</h2>
-<p id="rfc.section.4.4.p.1">Feedback is critical to the success of the grease technique (see <a href="#grease" class="xref">Section 4.2</a>).  The system only works if an protocol deployment has a means of detecting and analyzing errors.  Ignoring errors could allow those errors to become entrenched.  This process can be automated, but when operating at scale it might be difficult or impossible to collect details of specific errors.</p>
-<p id="rfc.section.4.4.p.2">Feedback on errors is more important during the development and early deployment of a change.  Disabling automatic error recovery methods during development improves visibility of errors.</p>
-<p id="rfc.section.4.4.p.3">Automated feedback systems are important for automated systems, or where error recovery is also automated.  For instance, connection failures with HTTP alternative services <a href="#ALT-SVC" class="xref">[ALT-SVC]</a> are not permitted to affect the outcome of transactions.  An automated feedback system for capturing failures in alternative services is therefore necessary for failures to be detected.</p>
+<p id="rfc.section.4.3.p.2">Permitting fewer protocol participants reduces the number of implementations that can prevent a new mechanism from being deployed.  As recommended in <a href="#PATH-SIGNALS" class="xref">[PATH-SIGNALS]</a>, use of encryption and integrity protection can be used to limit participation.</p>
+<p id="rfc.section.4.3.p.3">For example, the QUIC protocol <a href="#QUIC" class="xref">[QUIC]</a> adopts both encryption and integrity protection.  Encryption is used to carefully control what information is exposed to middleboxes.  For those fields that are not encrypted, QUIC uses integrity protection to prevent modification.</p>
 <h1 id="rfc.section.5">
-<a href="#rfc.section.5">5.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a>
+<a href="#rfc.section.5">5.</a> <a href="#feedback-mechanisms" id="feedback-mechanisms">Feedback Mechanisms</a>
 </h1>
-<p id="rfc.section.5.p.1">The ability to design, implement, and deploy new protocol mechanisms can be critical to security.  In particular, it is important to be able to replace cryptographic algorithms over time <a href="#AGILITY" class="xref">[AGILITY]</a>.  For example, preparing for replacement of weak hash algorithms was made more difficult through misuse <a href="#HASH" class="xref">[HASH]</a>.</p>
+<p id="rfc.section.5.p.1">Visibility of errors is critical to the success of the grease technique (see <a href="#grease" class="xref">Section 4.2</a>).  The system only works if an protocol deployment has a means of detecting and analyzing errors.  Ignoring errors could allow problems to become entrenched.  This process can be automated, but when operating at scale it might be difficult or impossible to collect details of specific errors.</p>
+<p id="rfc.section.5.p.2">Feedback on errors is more important during the development and early deployment of a change.  Disabling automatic error recovery methods during development improves visibility of errors.</p>
+<p id="rfc.section.5.p.3">Automated feedback systems are important for automated systems, or where error recovery is also automated.  For instance, connection failures with HTTP alternative services <a href="#ALT-SVC" class="xref">[ALT-SVC]</a> are not permitted to affect the outcome of transactions.  An automated feedback system for capturing failures in alternative services is therefore necessary for failures to be detected.</p>
 <h1 id="rfc.section.6">
-<a href="#rfc.section.6">6.</a> <a href="#iana-considerations" id="iana-considerations">IANA Considerations</a>
+<a href="#rfc.section.6">6.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a>
 </h1>
-<p id="rfc.section.6.p.1">This document makes no request of IANA.</p>
+<p id="rfc.section.6.p.1">The ability to design, implement, and deploy new protocol mechanisms can be critical to security.  In particular, it is important to be able to replace cryptographic algorithms over time <a href="#AGILITY" class="xref">[AGILITY]</a>.  For example, preparing for replacement of weak hash algorithms was made more difficult through misuse <a href="#HASH" class="xref">[HASH]</a>.</p>
+<h1 id="rfc.section.7">
+<a href="#rfc.section.7">7.</a> <a href="#iana-considerations" id="iana-considerations">IANA Considerations</a>
+</h1>
+<p id="rfc.section.7.p.1">This document makes no request of IANA.</p>
 <h1 id="rfc.references">
-<a href="#rfc.references">7.</a> Informative References</h1>
+<a href="#rfc.references">8.</a> Informative References</h1>
 <table><tbody>
 <tr>
 <td class="reference"><b id="AGILITY">[AGILITY]</b></td>
@@ -560,6 +565,11 @@ ul.toc li {
 <td class="reference"><b id="MPTCP">[MPTCP]</b></td>
 <td class="top">
 <a>Ford, A.</a>, <a>Raiciu, C.</a>, <a>Handley, M.</a> and <a>O. Bonaventure</a>, "<a href="https://tools.ietf.org/html/rfc6824">TCP Extensions for Multipath Operation with Multiple Addresses</a>", RFC 6824, DOI 10.17487/RFC6824, January 2013.</td>
+</tr>
+<tr>
+<td class="reference"><b id="PATH-SIGNALS">[PATH-SIGNALS]</b></td>
+<td class="top">
+<a>Hardie, T.</a>, "<a href="https://tools.ietf.org/html/draft-iab-path-signals-00">Path Signals</a>", Internet-Draft draft-iab-path-signals-00, May 2018.</td>
 </tr>
 <tr>
 <td class="reference"><b id="QUIC">[QUIC]</b></td>

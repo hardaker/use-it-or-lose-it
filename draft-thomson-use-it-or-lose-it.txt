@@ -4,8 +4,8 @@
 
 Network Working Group                                         M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Informational                             June 27, 2018
-Expires: December 29, 2018
+Intended status: Informational                           August 03, 2018
+Expires: February 4, 2019
 
 
           Long-term Viability of Protocol Extension Mechanisms
@@ -33,7 +33,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on December 29, 2018.
+   This Internet-Draft will expire on February 4, 2019.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                 Expires December 29, 2018               [Page 1]
+Thomson                 Expires February 4, 2019                [Page 1]
 
-Internet-Draft              Use It Or Lose It                  June 2018
+Internet-Draft              Use It Or Lose It                August 2018
 
 
 Table of Contents
@@ -72,10 +72,10 @@ Table of Contents
      4.1.  Active Use  . . . . . . . . . . . . . . . . . . . . . . .   8
      4.2.  Grease  . . . . . . . . . . . . . . . . . . . . . . . . .   8
      4.3.  Cryptography  . . . . . . . . . . . . . . . . . . . . . .   9
-     4.4.  Visibility of Faults  . . . . . . . . . . . . . . . . . .   9
-   5.  Security Considerations . . . . . . . . . . . . . . . . . . .  10
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
-   7.  Informative References  . . . . . . . . . . . . . . . . . . .  10
+   5.  Feedback Mechanisms . . . . . . . . . . . . . . . . . . . . .   9
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  10
+   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
+   8.  Informative References  . . . . . . . . . . . . . . . . . . .  10
    Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .  12
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  12
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson                 Expires December 29, 2018               [Page 2]
+Thomson                 Expires February 4, 2019                [Page 2]
 
-Internet-Draft              Use It Or Lose It                  June 2018
+Internet-Draft              Use It Or Lose It                August 2018
 
 
 2.  Implementations of Protocols are Imperfect
@@ -165,9 +165,9 @@ Internet-Draft              Use It Or Lose It                  June 2018
 
 
 
-Thomson                 Expires December 29, 2018               [Page 3]
+Thomson                 Expires February 4, 2019                [Page 3]
 
-Internet-Draft              Use It Or Lose It                  June 2018
+Internet-Draft              Use It Or Lose It                August 2018
 
 
    This has proven to be insufficient in practice.  Many protocols have
@@ -221,9 +221,9 @@ Internet-Draft              Use It Or Lose It                  June 2018
 
 
 
-Thomson                 Expires December 29, 2018               [Page 4]
+Thomson                 Expires February 4, 2019                [Page 4]
 
-Internet-Draft              Use It Or Lose It                  June 2018
+Internet-Draft              Use It Or Lose It                August 2018
 
 
 2.2.  Multi-Party Interactions and Middleboxes
@@ -277,9 +277,9 @@ Internet-Draft              Use It Or Lose It                  June 2018
 
 
 
-Thomson                 Expires December 29, 2018               [Page 5]
+Thomson                 Expires February 4, 2019                [Page 5]
 
-Internet-Draft              Use It Or Lose It                  June 2018
+Internet-Draft              Use It Or Lose It                August 2018
 
 
 3.  Retaining Viable Protocol Evolution Mechanisms
@@ -333,9 +333,9 @@ Internet-Draft              Use It Or Lose It                  June 2018
 
 
 
-Thomson                 Expires December 29, 2018               [Page 6]
+Thomson                 Expires February 4, 2019                [Page 6]
 
-Internet-Draft              Use It Or Lose It                  June 2018
+Internet-Draft              Use It Or Lose It                August 2018
 
 
 3.2.  Dependency is Better
@@ -389,9 +389,9 @@ Internet-Draft              Use It Or Lose It                  June 2018
 
 
 
-Thomson                 Expires December 29, 2018               [Page 7]
+Thomson                 Expires February 4, 2019                [Page 7]
 
-Internet-Draft              Use It Or Lose It                  June 2018
+Internet-Draft              Use It Or Lose It                August 2018
 
 
 4.  Defensive Design Principles for Protocols
@@ -445,15 +445,17 @@ Internet-Draft              Use It Or Lose It                  June 2018
 
 
 
-Thomson                 Expires December 29, 2018               [Page 8]
+Thomson                 Expires February 4, 2019                [Page 8]
 
-Internet-Draft              Use It Or Lose It                  June 2018
+Internet-Draft              Use It Or Lose It                August 2018
 
 
    Grease is deployed with the intent of quickly detecting errors in
-   implementing the mechanisms it safeguards.
+   implementing the mechanisms it safeguards.  Though it has been
+   effective at revealing problems in some cases with TLS, its efficacy
+   isn't proven more generally.
 
-   This form of defensive design has some limitations.  It does not
+   This style of defensive design has some limitations.  It does not
    necessarily create the need for an implementation to rely on the
    mechanism it safeguards; that is determined by the underlying
    protocol itself.  More critically, it does not easily translate to
@@ -469,24 +471,24 @@ Internet-Draft              Use It Or Lose It                  June 2018
    authorized participants are able to influence whether a new protocol
    feature is used.
 
-   Data that is exchanged under encryption cannot be seen by
-   middleboxes, excluding them from participating in that part of the
-   protocol.  Similarly, data that is exchanged with integrity
-   protection cannot be modified without being detected and discarded.
+   Permitting fewer protocol participants reduces the number of
+   implementations that can prevent a new mechanism from being deployed.
+   As recommended in [PATH-SIGNALS], use of encryption and integrity
+   protection can be used to limit participation.
 
-   The QUIC protocol [QUIC] adopts both encryption and integrity
-   protection.  Encryption is used to carefully control what information
-   is exposed to middleboxes.  For those fields that are not encrypted,
-   QUIC uses integrity protection to prevent modification.
+   For example, the QUIC protocol [QUIC] adopts both encryption and
+   integrity protection.  Encryption is used to carefully control what
+   information is exposed to middleboxes.  For those fields that are not
+   encrypted, QUIC uses integrity protection to prevent modification.
 
-4.4.  Visibility of Faults
+5.  Feedback Mechanisms
 
-   Feedback is critical to the success of the grease technique (see
-   Section 4.2).  The system only works if an protocol deployment has a
-   means of detecting and analyzing errors.  Ignoring errors could allow
-   those errors to become entrenched.  This process can be automated,
-   but when operating at scale it might be difficult or impossible to
-   collect details of specific errors.
+   Visibility of errors is critical to the success of the grease
+   technique (see Section 4.2).  The system only works if an protocol
+   deployment has a means of detecting and analyzing errors.  Ignoring
+   errors could allow problems to become entrenched.  This process can
+   be automated, but when operating at scale it might be difficult or
+   impossible to collect details of specific errors.
 
    Feedback on errors is more important during the development and early
    deployment of a change.  Disabling automatic error recovery methods
@@ -496,17 +498,18 @@ Internet-Draft              Use It Or Lose It                  June 2018
    where error recovery is also automated.  For instance, connection
    failures with HTTP alternative services [ALT-SVC] are not permitted
    to affect the outcome of transactions.  An automated feedback system
+
+
+
+Thomson                 Expires February 4, 2019                [Page 9]
+
+Internet-Draft              Use It Or Lose It                August 2018
+
+
    for capturing failures in alternative services is therefore necessary
    for failures to be detected.
 
-
-
-Thomson                 Expires December 29, 2018               [Page 9]
-
-Internet-Draft              Use It Or Lose It                  June 2018
-
-
-5.  Security Considerations
+6.  Security Considerations
 
    The ability to design, implement, and deploy new protocol mechanisms
    can be critical to security.  In particular, it is important to be
@@ -514,11 +517,11 @@ Internet-Draft              Use It Or Lose It                  June 2018
    example, preparing for replacement of weak hash algorithms was made
    more difficult through misuse [HASH].
 
-6.  IANA Considerations
+7.  IANA Considerations
 
    This document makes no request of IANA.
 
-7.  Informative References
+8.  Informative References
 
    [AGILITY]  Housley, R., "Guidelines for Cryptographic Algorithm
               Agility and Selecting Mandatory-to-Implement Algorithms",
@@ -549,18 +552,19 @@ Internet-Draft              Use It Or Lose It                  June 2018
    [GREASE]   Benjamin, D., "Applying GREASE to TLS Extensibility",
               draft-ietf-tls-grease-01 (work in progress), June 2018.
 
+
+
+
+
+
+Thomson                 Expires February 4, 2019               [Page 10]
+
+Internet-Draft              Use It Or Lose It                August 2018
+
+
    [HASH]     Bellovin, S. and E. Rescorla, "Deploying a New Hash
               Algorithm", Proceedings of NDSS '06 , 2006,
               <https://www.cs.columbia.edu/~smb/papers/new-hash.pdf>.
-
-
-
-
-
-Thomson                 Expires December 29, 2018              [Page 10]
-
-Internet-Draft              Use It Or Lose It                  June 2018
-
 
    [HTTP]     Fielding, R., Ed. and J. Reschke, Ed., "Hypertext Transfer
               Protocol (HTTP/1.1): Message Syntax and Routing",
@@ -588,6 +592,10 @@ Internet-Draft              Use It Or Lose It                  June 2018
               Addresses", RFC 6824, DOI 10.17487/RFC6824, January 2013,
               <https://www.rfc-editor.org/info/rfc6824>.
 
+   [PATH-SIGNALS]
+              Hardie, T., "Path Signals", draft-iab-path-signals-00
+              (work in progress), May 2018.
+
    [QUIC]     Iyengar, J. and M. Thomson, "QUIC: A UDP-Based Multiplexed
               and Secure Transport", draft-ietf-quic-transport-12 (work
               in progress), May 2018.
@@ -602,6 +610,14 @@ Internet-Draft              Use It Or Lose It                  June 2018
               DOI 10.17487/RFC3261, June 2002,
               <https://www.rfc-editor.org/info/rfc3261>.
 
+
+
+
+Thomson                 Expires February 4, 2019               [Page 11]
+
+Internet-Draft              Use It Or Lose It                August 2018
+
+
    [SMTP]     Resnick, P., Ed., "Internet Message Format", RFC 5322,
               DOI 10.17487/RFC5322, October 2008,
               <https://www.rfc-editor.org/info/rfc5322>.
@@ -610,13 +626,6 @@ Internet-Draft              Use It Or Lose It                  June 2018
               never work", March 2016,
               <https://mailarchive.ietf.org/arch/msg/
               tls/1t79gzNItZd71DwwoaqcQQ_4Yxc>.
-
-
-
-Thomson                 Expires December 29, 2018              [Page 11]
-
-Internet-Draft              Use It Or Lose It                  June 2018
-
 
    [SUCCESS]  Thaler, D. and B. Aboba, "What Makes for a Successful
               Protocol?", RFC 5218, DOI 10.17487/RFC5218, July 2008,
@@ -660,13 +669,4 @@ Author's Address
 
 
 
-
-
-
-
-
-
-
-
-
-Thomson                 Expires December 29, 2018              [Page 12]
+Thomson                 Expires February 4, 2019               [Page 12]
