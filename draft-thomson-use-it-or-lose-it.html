@@ -83,8 +83,8 @@ table.header td, table#rfc\.headerblock td {
   line-height: 28px;
 }
 
-samp, tt, code, pre {
-  font: 15px Consolas, monospace;
+samp, tt, code, pre, span.tt {
+  font: 13.5px Consolas, monospace;
   font-size-adjust: none;
 }
 pre {
@@ -301,12 +301,12 @@ ul.toc li {
 <link href="#rfc.authors" rel="Chapter">
 
 
-  <meta name="generator" content="xml2rfc version 2.9.9 - https://tools.ietf.org/tools/xml2rfc" />
+  <meta name="generator" content="xml2rfc version 2.15.4 - https://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Thomson, M." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-use-it-or-lose-it-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2018-08-03" />
+  <meta name="dct.issued" scheme="ISO8601" content="2019-01-01" />
   <meta name="dct.abstract" content="The ability to change protocols depends on exercising the extension and version negotiation mechanisms that support change.  Protocols that don&#8217;t use these mechanisms can find that deploying changes can be difficult and costly." />
   <meta name="description" content="The ability to change protocols depends on exercising the extension and version negotiation mechanisms that support change.  Protocols that don&#8217;t use these mechanisms can find that deploying changes can be difficult and costly." />
 
@@ -327,10 +327,10 @@ ul.toc li {
 </tr>
 <tr>
 <td class="left">Intended status: Informational</td>
-<td class="right">August 03, 2018</td>
+<td class="right">January 01, 2019</td>
 </tr>
 <tr>
-<td class="left">Expires: February 4, 2019</td>
+<td class="left">Expires: July 5, 2019</td>
 <td class="right"></td>
 </tr>
 
@@ -347,9 +347,9 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on February 4, 2019.</p>
+<p>This Internet-Draft will expire on July 5, 2019.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
-<p>Copyright (c) 2018 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>Copyright (c) 2019 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
 
   
@@ -454,17 +454,18 @@ ul.toc li {
 <p id="rfc.section.3.1.p.5">These examples also confirm the case that good design is not a prerequisite for success.  On the contrary, success is often despite shortcomings in the design.  For instance, the shortcomings of HTTP header fields are significant enough that there are ongoing efforts to improve the syntax <a href="#HTTP-HEADERS" class="xref">[HTTP-HEADERS]</a>.</p>
 <p id="rfc.section.3.1.p.6">Only using a protocol capability is able to ensure availability of that capability.  Protocols that fail to use a mechanism, or a protocol that only rarely uses a mechanism, suffer an inability to rely on that mechanism.</p>
 <h2 id="rfc.section.3.2">
-<a href="#rfc.section.3.2">3.2.</a> <a href="#dependency-is-better" id="dependency-is-better">Dependency is Better</a>
+<a href="#rfc.section.3.2">3.2.</a> <a href="#need-it" id="need-it">Dependency is Better</a>
 </h2>
 <p id="rfc.section.3.2.p.1">The best way to guarantee that a protocol mechanism is used is to make it critical to an endpoint participating in that protocol.  This means that implementations rely on both the existence of the protocol mechanism and its use.</p>
 <p id="rfc.section.3.2.p.2">For example, the message format in SMTP relies on header fields for most of its functions, including the most basic functions.  A deployment of SMTP cannot avoid including an implementation of header field handling.  In addition to this, the regularity with which new header fields are defined and used ensures that deployments frequently encounter header fields that it does not understand.  An SMTP implementation therefore needs to be able to both process header fields that it understands and ignore those that it does not.</p>
 <p id="rfc.section.3.2.p.3">In this way, implementing the extensibility mechanism is not merely mandated by the specification, it is crucial to the functioning of a protocol deployment.  Should an implementation fail to correctly implement the mechanism, that failure would quickly become apparent.</p>
 <p id="rfc.section.3.2.p.4">Caution is advised to avoid assuming that building a dependency on an extension mechanism is sufficient to ensure availability of that mechanism in the long term.  If the set of possible uses is narrowly constrained and deployments do not change over time, implementations might not see new variations or assume a narrower interpretation of what is possible.  Those implementations might still exhibit errors when presented with a new variation.</p>
 <h2 id="rfc.section.3.3">
-<a href="#rfc.section.3.3">3.3.</a> <a href="#unused-extension-points-become-unusable" id="unused-extension-points-become-unusable">Unused Extension Points Become Unusable</a>
+<a href="#rfc.section.3.3">3.3.</a> <a href="#unused" id="unused">Unused Extension Points Become Unusable</a>
 </h2>
 <p id="rfc.section.3.3.p.1">In contrast, there are many examples of extension points in protocols that have been either completely unused, or their use was so infrequent that they could no longer be relied upon to function correctly.</p>
 <p id="rfc.section.3.3.p.2">HTTP has a number of very effective extension points in addition to the aforementioned header fields.  It also has some examples of extension point that are so rarely used that it is possible that they are not at all usable.  Extension points in HTTP that might be unwise to use include the extension point on each chunk in the chunked transfer coding <a href="#HTTP" class="xref">[HTTP]</a>, the ability to use transfer codings other than the chunked coding, and the range unit in a range request <a href="#HTTP-RANGE" class="xref">[HTTP-RANGE]</a>.</p>
+<p id="rfc.section.3.3.p.3">Even where extension points have multiple valid values, if the set of permitted values does not change over time, there is still a risk that new values are not tolerated by existing implementations.  If the set of values for a particular field remains fixed over a long period, some implementations might not correctly handle a new value when it is introduced.  For example, implementations of TLS broke when new values of the signature_algorithms extension were introduced.</p>
 <h1 id="rfc.section.4">
 <a href="#rfc.section.4">4.</a> <a href="#strategies" id="strategies">Defensive Design Principles for Protocols</a>
 </h1>
@@ -473,6 +474,8 @@ ul.toc li {
 <a href="#rfc.section.4.1">4.1.</a> <a href="#active-use" id="active-use">Active Use</a>
 </h2>
 <p id="rfc.section.4.1.p.1">As discussed in <a href="#use-it" class="xref">Section 3</a>, the most effective defense against misuse of protocol extension points is active use.</p>
+<p id="rfc.section.4.1.p.2">Implementations are most likely to be tolerant of new values if they depend on being able to use new values.  Failing that, implementations that routinely see new values are more likely to correctly handle new values.  More frequent changes will improve the likelihood that incorrect handling or intolerance is discovered and rectified.  The longer an intolerant implementation is deployed, the more difficult it is to correct.</p>
+<p id="rfc.section.4.1.p.3">What active use means could depend greatly on the environment in which a protocol is deployed.  The frequency of changes necessary to safeguard some mechanisms might be slow enough to attract ossification in another protocol deployment, while being excessive in others.  There are currently no firm guidelines for new protocol development, as much is being learned about what techniques are most effective.</p>
 <h2 id="rfc.section.4.2">
 <a href="#rfc.section.4.2">4.2.</a> <a href="#grease" id="grease">Grease</a>
 </h2>
@@ -550,7 +553,7 @@ ul.toc li {
 <tr>
 <td class="reference"><b id="HTTP-HEADERS">[HTTP-HEADERS]</b></td>
 <td class="top">
-<a>Nottingham, M.</a> and <a>P. Kamp</a>, "<a href="https://tools.ietf.org/html/draft-ietf-httpbis-header-structure-06">Structured Headers for HTTP</a>", Internet-Draft draft-ietf-httpbis-header-structure-06, June 2018.</td>
+<a>Nottingham, M.</a> and <a>P. Kamp</a>, "<a href="https://tools.ietf.org/html/draft-ietf-httpbis-header-structure-09">Structured Headers for HTTP</a>", Internet-Draft draft-ietf-httpbis-header-structure-09, December 2018.</td>
 </tr>
 <tr>
 <td class="reference"><b id="HTTP-RANGE">[HTTP-RANGE]</b></td>
@@ -570,12 +573,12 @@ ul.toc li {
 <tr>
 <td class="reference"><b id="PATH-SIGNALS">[PATH-SIGNALS]</b></td>
 <td class="top">
-<a>Hardie, T.</a>, "<a href="https://tools.ietf.org/html/draft-iab-path-signals-00">Path Signals</a>", Internet-Draft draft-iab-path-signals-00, May 2018.</td>
+<a>Hardie, T.</a>, "<a href="https://tools.ietf.org/html/draft-iab-path-signals-02">Transport Protocol Path Signals</a>", Internet-Draft draft-iab-path-signals-02, November 2018.</td>
 </tr>
 <tr>
 <td class="reference"><b id="QUIC">[QUIC]</b></td>
 <td class="top">
-<a>Iyengar, J.</a> and <a>M. Thomson</a>, "<a href="https://tools.ietf.org/html/draft-ietf-quic-transport-12">QUIC: A UDP-Based Multiplexed and Secure Transport</a>", Internet-Draft draft-ietf-quic-transport-12, May 2018.</td>
+<a>Iyengar, J.</a> and <a>M. Thomson</a>, "<a href="https://tools.ietf.org/html/draft-ietf-quic-transport-17">QUIC: A UDP-Based Multiplexed and Secure Transport</a>", Internet-Draft draft-ietf-quic-transport-17, December 2018.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2462">[RFC2462]</b></td>
@@ -629,7 +632,7 @@ ul.toc li {
 </tr>
 </tbody></table>
 <h1 id="rfc.acknowledgments"><a href="#rfc.acknowledgments">Acknowledgments</a></h1>
-<p id="rfc.section.A.p.1">Brian Trammell and Mark Nottingham made contributions to this document.</p>
+<p id="rfc.section.A.p.1">Mirja K&#252;hlewind, Mark Nottingham, and Brian Trammell made significant contributions to this document.</p>
 <h1 id="rfc.authors"><a href="#rfc.authors">Author's Address</a></h1>
 <div class="avoidbreak">
   <address class="vcard">
@@ -649,7 +652,7 @@ ul.toc li {
 	  </span>
 	  <span class="country-name vcardline"></span>
 	</span>
-	<span class="vcardline">EMail: <a href="mailto:martin.thomson@gmail.com">martin.thomson@gmail.com</a></span>
+	<span class="vcardline">EMail: <a href="mailto:mt@lowentropy.net">mt@lowentropy.net</a></span>
 
   </address>
 </div>
