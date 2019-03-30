@@ -41,9 +41,9 @@
 
     ],
     "milestone": null,
-    "comments": 0,
+    "comments": 3,
     "created_at": "2019-03-27T13:33:11Z",
-    "updated_at": "2019-03-27T13:33:11Z",
+    "updated_at": "2019-03-28T08:50:07Z",
     "closed_at": null,
     "author_association": "OWNER",
     "body": "...and their interaction with greasing. Invariants are the properties of the protocol that you don't want to protect."
