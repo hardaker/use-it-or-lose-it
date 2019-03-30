@@ -301,12 +301,12 @@ ul.toc li {
 <link href="#rfc.authors" rel="Chapter">
 
 
-  <meta name="generator" content="xml2rfc version 2.19.1 - https://tools.ietf.org/tools/xml2rfc" />
+  <meta name="generator" content="xml2rfc version 2.22.2 - https://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Thomson, M." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-use-it-or-lose-it-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2019-03-27" />
+  <meta name="dct.issued" scheme="ISO8601" content="2019-03-30" />
   <meta name="dct.abstract" content="The ability to change protocols depends on exercising the extension and version negotiation mechanisms that support change.  Protocols that don&#8217;t use these mechanisms can find that deploying changes can be difficult and costly." />
   <meta name="description" content="The ability to change protocols depends on exercising the extension and version negotiation mechanisms that support change.  Protocols that don&#8217;t use these mechanisms can find that deploying changes can be difficult and costly." />
 
@@ -327,10 +327,10 @@ ul.toc li {
 </tr>
 <tr>
 <td class="left">Intended status: Informational</td>
-<td class="right">March 27, 2019</td>
+<td class="right">March 30, 2019</td>
 </tr>
 <tr>
-<td class="left">Expires: September 28, 2019</td>
+<td class="left">Expires: October 1, 2019</td>
 <td class="right"></td>
 </tr>
 
@@ -347,7 +347,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on September 28, 2019.</p>
+<p>This Internet-Draft will expire on October 1, 2019.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2019 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -408,9 +408,9 @@ ul.toc li {
 <a href="#rfc.section.2">2.</a> <a href="#implementations-of-protocols-are-imperfect" id="implementations-of-protocols-are-imperfect">Implementations of Protocols are Imperfect</a>
 </h1>
 <p id="rfc.section.2.p.1">A change to a protocol can be made extremely difficult to deploy if there are bugs in implementations with which the new deployment needs to interoperate.  Bugs in the handling of new codepoints or extensions can mean that instead of handling the mechanism as designed, endpoints react poorly.  This can manifest as abrupt termination of sessions, errors, crashes, or disappearances of endpoints and timeouts.</p>
-<p id="rfc.section.2.p.2">Interoperability with other implementations is usually highly valued, so deploying mechanisms that trigger adverse reactions like these can be untenable.  Where interoperability is a competitive advantage, this is true even if the negative reactions happen infrequently or only under relatively rare conditions.</p>
+<p id="rfc.section.2.p.2">Interoperability with other implementations is usually highly valued, so deploying mechanisms that trigger adverse reactions can be untenable.  Where interoperability is a competitive advantage, this is true even if the negative reactions happen infrequently or only under relatively rare conditions.</p>
 <p id="rfc.section.2.p.3">Deploying a change to a protocol could require fixing a substantial proportion of the bugs that the change exposes.  This can involve a difficult process that includes identifying the cause of these errors, finding the responsible implementation, coordinating a bug fix and release plan, contacting the operator of affected services, and waiting for the fix to be deployed to those services.</p>
-<p id="rfc.section.2.p.4">Given the effort involved in fixing these problems, the existence of these sorts of bugs can outright prevent the deployment of some types of protocol changes.  It could even be necessary to come up with a new protocol design that uses a different method to achieve the same result.</p>
+<p id="rfc.section.2.p.4">Given the effort involved in fixing problems, the existence of these sorts of bugs can outright prevent the deployment of some types of protocol changes.  It could even be necessary to come up with a new protocol design that uses a different method to achieve the same result.</p>
 <p id="rfc.section.2.p.5">The set of interoperable features in a protocol is often the subset of its features that have some value to those implementing and deploying the protocol.  It is not always the case that future extensibility is in that set.</p>
 <h2 id="rfc.section.2.1">
 <a href="#rfc.section.2.1">2.1.</a> <a href="#good-protocol-design-is-not-sufficient" id="good-protocol-design-is-not-sufficient">Good Protocol Design is Not Sufficient</a>
@@ -420,7 +420,7 @@ ul.toc li {
 <p></p>
 
 <ul class="empty"><li>This means that, to be useful, a protocol version- negotiation mechanism should be simple enough that it can reasonably be assumed that all the implementers of the first protocol version at least managed to implement the version-negotiation mechanism correctly.</li></ul>
-<p id="rfc.section.2.1.p.4">This has proven to be insufficient in practice.  Many protocols have evidence of imperfect implementation of these critical mechanisms.  Mechanisms that aren&#8217;t used are the ones that fail most often.  The same paragraph from RFC 6709 acknowledges the existence of this problem, but does not offer any remedy:</p>
+<p id="rfc.section.2.1.p.4">This has proven to be insufficient in practice.  Many protocols have evidence of imperfect implementation of critical mechanisms of this sort.  Mechanisms that aren&#8217;t used are the ones that fail most often.  The same paragraph from RFC 6709 acknowledges the existence of this problem, but does not offer any remedy:</p>
 <p></p>
 
 <ul class="empty"><li>The nature of protocol version-negotiation mechanisms is that, by definition, they don&#8217;t get widespread real-world testing until <em>after</em> the base protocol has been deployed for a while, and its deficiencies have become evident.</li></ul>
@@ -434,10 +434,10 @@ ul.toc li {
 <a href="#rfc.section.2.2">2.2.</a> <a href="#multi-party-interactions-and-middleboxes" id="multi-party-interactions-and-middleboxes">Multi-Party Interactions and Middleboxes</a>
 </h2>
 <p id="rfc.section.2.2.p.1">Even the most superficially simple protocols can often involve more actors than is immediately apparent.  A two-party protocol has two ends, but even at the endpoints of an interaction, protocol elements can be passed on to other entities in ways that can affect protocol operation.</p>
-<p id="rfc.section.2.2.p.2">One of the key challenges in deploying new features in a protocol is ensuring compatibility with all actors that could influence the outcome.</p>
-<p id="rfc.section.2.2.p.3">Protocols deployed without active measures against intermediation will tend to become intermediated over time, as network operators deploy middleboxes to perform some function on traffic.  In particular, one of the consequences of an unencrypted protocol is that any element on path can interact with the protocol.  For example, HTTP was specifically designed with intermediation in mind, transparent proxies <a href="#HTTP" class="xref">[HTTP]</a> are not only possible but sometimes advantageous, despite some significant downsides.  Consequently, transparent proxies for cleartext HTTP are commonplace.</p>
+<p id="rfc.section.2.2.p.2">One of the key challenges in deploying new features is ensuring compatibility with all actors that could be involved in the protocol.</p>
+<p id="rfc.section.2.2.p.3">Protocols deployed without active measures against intermediation will tend to become intermediated over time, as network operators deploy middleboxes to perform some function on traffic <a href="#PATH-SIGNALS" class="xref">[PATH-SIGNALS]</a>.  In particular, one of the consequences of an unencrypted protocol is that any element on path can interact with the protocol.  For example, HTTP was specifically designed with intermediation in mind, transparent proxies <a href="#HTTP" class="xref">[HTTP]</a> are not only possible but sometimes advantageous, despite some significant downsides.  Consequently, transparent proxies for cleartext HTTP are commonplace.</p>
 <p id="rfc.section.2.2.p.4">Middleboxes are also protocol participants, to the degree that they are able to observe and act in ways that affect the protocol.  The degree to which a middlebox participates varies from the basic functions that a router performs to full participation.  For example, a SIP back-to-back user agent (B2BUA) <a href="#B2BUA" class="xref">[B2BUA]</a> can be very deeply involved in the SIP protocol.</p>
-<p id="rfc.section.2.2.p.5">This phenomenon appears at all layers of the protocol stack, even when protocols are not designed with middlebox participation in mind. TCP&#8217;s <a href="#TCP" class="xref">[TCP]</a> extension points have been rendered difficult to use, largely due to middlebox interactions, as experience with Multipath TCP <a href="#MPTCP" class="xref">[MPTCP]</a> has shown. IP&#8217;s version field was rendered useless when encapsulated over Ethernet, requring a new ethertype with IPv6 <a href="#RFC2462" class="xref">[RFC2462]</a>, due in part to layer 2 devices making version-independent assumptions about the structure of the IPv4 header.</p>
+<p id="rfc.section.2.2.p.5">This phenomenon appears at all layers of the protocol stack, even when protocols are not designed with middlebox participation in mind. TCP&#8217;s <a href="#TCP" class="xref">[TCP]</a> extension points have been rendered difficult to use, largely due to middlebox interactions, as experience with Multipath TCP <a href="#MPTCP" class="xref">[MPTCP]</a> and Fast Open <a href="#TFO" class="xref">[TFO]</a> has shown. IP&#8217;s version field was rendered useless when encapsulated over Ethernet, requring a new ethertype with IPv6 <a href="#RFC2462" class="xref">[RFC2462]</a>, due in part to layer 2 devices making version-independent assumptions about the structure of the IPv4 header.</p>
 <p id="rfc.section.2.2.p.6">By increasing the number of different actors involved in any single protocol exchange, the number of potential implementation bugs that a deployment needs to contend with also increases.  In particular, incompatible changes to a protocol that might be negotiated between endpoints in ignorance of the presence of a middlebox can result in a middlebox acting badly.</p>
 <p id="rfc.section.2.2.p.7">Thus, middleboxes can increase the difficulty of deploying changes to a protocol considerably.</p>
 <h1 id="rfc.section.3">
@@ -448,7 +448,7 @@ ul.toc li {
 <a href="#rfc.section.3.1">3.1.</a> <a href="#examples-of-active-use" id="examples-of-active-use">Examples of Active Use</a>
 </h2>
 <p id="rfc.section.3.1.p.1">The conditions for retaining the ability to evolve a design is most clearly evident in the protocols that are known to have viable version negotiation or extension points.  The definition of mechanisms alone is insufficient; it&#8217;s the active use of those mechanisms that determines the existence of freedom.</p>
-<p id="rfc.section.3.1.p.2">For example, header fields in email <a href="#SMTP" class="xref">[SMTP]</a>, HTTP <a href="#HTTP" class="xref">[HTTP]</a> and SIP <a href="#SIP" class="xref">[SIP]</a> all derive from the same basic design.  There is no evidence of significant barriers to deploying header fields with new names and semantics in email and HTTP, though the widespread deployment of SIP B2BUAs means that new SIP header fields can be more difficult.</p>
+<p id="rfc.section.3.1.p.2">For example, header fields in email <a href="#SMTP" class="xref">[SMTP]</a>, HTTP <a href="#HTTP" class="xref">[HTTP]</a> and SIP <a href="#SIP" class="xref">[SIP]</a> all derive from the same basic design.  There is no evidence of significant barriers to deploying header fields with new names and semantics in email and HTTP, though the widespread deployment of SIP B2BUAs means that new SIP header fields do not reliably reach peers.</p>
 <p id="rfc.section.3.1.p.3">In another example, the attribute-value pairs (AVPs) in Diameter <a href="#DIAMETER" class="xref">[DIAMETER]</a> are fundamental to the design of the protocol.  The definition of new uses of Diameter regularly exercise the ability to add new AVPs and do so with no fear that the new feature might not be successfully deployed.</p>
 <p id="rfc.section.3.1.p.4">These examples show extension points that are heavily used also being relatively unaffected by deployment issues preventing addition of new values for new use cases.</p>
 <p id="rfc.section.3.1.p.5">These examples also confirm the case that good design is not a prerequisite for success.  On the contrary, success is often despite shortcomings in the design.  For instance, the shortcomings of HTTP header fields are significant enough that there are ongoing efforts to improve the syntax <a href="#HTTP-HEADERS" class="xref">[HTTP-HEADERS]</a>.</p>
@@ -486,7 +486,7 @@ ul.toc li {
 <p id="rfc.section.4.2.p.4">To avoid simple techniques for filtering greasing codepoints, grease values are not reserved from a single contiguous block of code points, but are distributed evenly across the entire space of code points.  Reserving a randomly selected set of code points has a greater chance of avoiding this problem, though it might be more difficult to specify and implement, especially over larger code point spaces.</p>
 <p id="rfc.section.4.2.p.5">Without reserved greasing codepoints, an implementation can use code points from spaces used for private or experimental use if such a range exists.  In addition to the risk of triggering participation in an unwanted experiment, this can be less effective.  Incorrect implementations might still be able to correctly identify these code points and ignore them.</p>
 <p id="rfc.section.4.2.p.6">Grease is deployed with the intent of quickly detecting errors in implementing the mechanisms it safeguards.  Though it has been effective at revealing problems in some cases with TLS, its efficacy isn&#8217;t proven more generally.</p>
-<p id="rfc.section.4.2.p.7">This style of defensive design has some limitations.  It does not necessarily create the need for an implementation to rely on the mechanism it safeguards; that is determined by the underlying protocol itself.  More critically, it does not easily translate to other forms of extension point.  For instance, HMSV negotiation cannot be greased in this fashion.  Other techniques might be necessary for protocols that don&#8217;t rely on the particular style of exchange that is predominant in TLS.</p>
+<p id="rfc.section.4.2.p.7">This style of defensive design is limited because it is only superficial.  It only exercises a small part of the mechanisms supporting extensibility.  More critically, it does not easily translate to all forms of extension point.  For instance, HMSV negotiation cannot be greased in this fashion.  Other techniques might be necessary for protocols that don&#8217;t rely on the particular style of exchange that is predominant in TLS.</p>
 <h2 id="rfc.section.4.3">
 <a href="#rfc.section.4.3">4.3.</a> <a href="#cryptography" id="cryptography">Cryptography</a>
 </h2>
@@ -617,6 +617,11 @@ ul.toc li {
 <a>Postel, J.</a>, "<a href="https://tools.ietf.org/html/rfc793">Transmission Control Protocol</a>", STD 7, RFC 793, DOI 10.17487/RFC0793, September 1981.</td>
 </tr>
 <tr>
+<td class="reference"><b id="TFO">[TFO]</b></td>
+<td class="top">
+<a>Cheng, Y.</a>, <a>Chu, J.</a>, <a>Radhakrishnan, S.</a> and <a>A. Jain</a>, "<a href="https://tools.ietf.org/html/rfc7413">TCP Fast Open</a>", RFC 7413, DOI 10.17487/RFC7413, December 2014.</td>
+</tr>
+<tr>
 <td class="reference"><b id="TLS-EXT">[TLS-EXT]</b></td>
 <td class="top">
 <a>Eastlake 3rd, D.</a>, "<a href="https://tools.ietf.org/html/rfc6066">Transport Layer Security (TLS) Extensions: Extension Definitions</a>", RFC 6066, DOI 10.17487/RFC6066, January 2011.</td>
@@ -629,7 +634,7 @@ ul.toc li {
 <tr>
 <td class="reference"><b id="TLS13">[TLS13]</b></td>
 <td class="top">
-<a>Rescorla, E.</a>, "<a href="https://tools.ietf.org/html/draft-ietf-tls-tls13-28">The Transport Layer Security (TLS) Protocol Version 1.3</a>", Internet-Draft draft-ietf-tls-tls13-28, March 2018.</td>
+<a>Rescorla, E.</a>, "<a href="https://tools.ietf.org/html/rfc8446">The Transport Layer Security (TLS) Protocol Version 1.3</a>", RFC 8446, DOI 10.17487/RFC8446, August 2018.</td>
 </tr>
 <tr>
 <td class="reference"><b id="TRANSITIONS">[TRANSITIONS]</b></td>
